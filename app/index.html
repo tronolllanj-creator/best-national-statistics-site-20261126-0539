@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Caldoria National Statistics Office</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Caldoria National Statistics Office</h1>
+        <nav>
+            <a href="#/">Overview</a>
+            <a href="#/population">Population</a>
+            <a href="#/economy">Economy</a>
+            <a href="#/health">Health</a>
+            <a href="#/education">Education</a>
+            <a href="#/data">Data</a>
+        </nav>
+        <div class="filters">
+            <label for="year-select">Year</label>
+            <select id="year-select">
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025" selected>2025</option>
+            </select>
+            <label for="region-select">Region</label>
+            <select id="region-select">
+                <option value="all" selected>All regions</option>
+                <option value="northvale">Northvale</option>
+                <option value="eastmere">Eastmere</option>
+                <option value="southford">Southford</option>
+                <option value="westhaven">Westhaven</option>
+                <option value="centralia">Centralia</option>
+                <option value="lakeshire">Lakeshire</option>
+            </select>
+        </div>
+    </header>
+    <main id="app">
+        <section id="route-overview" class="route active">
+            <div class="kpi-grid">
+                <article id="kpi-pop" class="kpi-card"><h2>Population</h2><p class="value"></p></article>
+                <article id="kpi-gdp" class="kpi-card"><h2>GDP (bn ₡)</h2><p class="value"></p></article>
+                <article id="kpi-life" class="kpi-card"><h2>Life Expectancy</h2><p class="value"></p></article>
+                <article id="kpi-literacy" class="kpi-card"><h2>Literacy Rate</h2><p class="value"></p></article>
+            </div>
+            <div id="chart-pop-trend" class="chart"></div>
+            <div id="chart-gdp" class="chart"></div>
+            <section class="latest-releases">
+                <h2>Latest releases</h2>
+                <ul>
+                    <li><time datetime="2025-09-15">15 September 2025</time> – Annual Population Census Summary</li>
+                    <li><time datetime="2025-08-01">1 August 2025</time> – Quarterly GDP Flash Estimate</li>
+                    <li><time datetime="2025-07-20">20 July 2025</time> – Health Outcomes Report 2024</li>
+                    <li><time datetime="2025-06-10">10 June 2025</time> – Education Enrolment Statistics</li>
+                </ul>
+            </section>
+        </section>
+        <section id="route-population" class="route">
+            <div id="chart-pop-regions" class="chart"></div>
+            <input type="search" id="region-search" placeholder="Search region…" aria-label="Search region">
+            <table id="region-table" class="sortable">
+                <thead>
+                    <tr>
+                        <th scope="col" data-sort="string">Region</th>
+                        <th scope="col" data-sort="number">Population</th>
+                        <th scope="col" data-sort="number">Change (%)</th>
+                        <th scope="col" data-sort="number">Density (per km²)</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+        <section id="route-economy" class="route">
+            <div class="tabs" role="tablist">
+                <button role="tab" data-tab="gdp" aria-selected="true">GDP</button>
+                <button role="tab" data-tab="jobs" aria-selected="false">Jobs</button>
+                <button role="tab" data-tab="trade" aria-selected="false">Trade</button>
+            </div>
+            <div id="tab-gdp" class="tabpanel" role="tabpanel"></div>
+            <div id="tab-jobs" class="tabpanel" role="tabpanel" hidden></div>
+            <div id="tab-trade" class="tabpanel" role="tabpanel" hidden></div>
+            <div id="chart-economy" class="chart"></div>
+            <table id="economy-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Indicator</th>
+                        <th scope="col">Value</th>
+                        <th scope="col">Year</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+        <section id="route-health" class="route">
+            <div class="kpi-grid">
+                <article class="kpi-card"><h2>Infant Mortality</h2><p class="value"></p></article>
+                <article class="kpi-card"><h2>Hospital Beds per 10,000</h2><p class="value"></p></article>
+                <article class="kpi-card"><h2>Doctors per 10,000</h2><p class="value"></p></article>
+            </div>
+            <div id="chart-life" class="chart"></div>
+            <table id="health-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Year</th>
+                        <th scope="col">Life Expectancy</th>
+                        <th scope="col">Infant Mortality</th>
+                        <th scope="col">Hospital Beds</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+        <section id="route-education" class="route">
+            <div id="chart-enrol" class="chart"></div>
+            <table id="education-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Year</th>
+                        <th scope="col">Primary Enrolment</th>
+                        <th scope="col">Secondary Enrolment</th>
+                        <th scope="col">Tertiary Enrolment</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+        <section id="route-data" class="route">
+            <input type="search" id="indicator-search" placeholder="Search indicator…" aria-label="Search indicator">
+            <table id="indicator-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Indicator</th>
+                        <th scope="col">Source</th>
+                        <th scope="col">Year</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <p class="methodology">Methodology: All figures are compiled from the Caldoria National Statistics Office’s annual surveys, administrative registers, and modelled estimates. Data are revised annually; definitions follow Caldorian statistical standards, which are aligned with international guidelines where applicable.</p>
+        </section>
+    <p class="about-note">Caldoria is a fictional country; all figures on this site are illustrative examples published by its National Statistics Office.</p>
+    </main>
+    <footer>
+        <p>Figures: Caldoria National Statistics Office, 2025. Fictional country; figures are illustrative.</p>
+    </footer>
+    <script src="data.js"></script>
+    <script src="charts.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
